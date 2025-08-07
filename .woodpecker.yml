@@ -17,5 +17,5 @@ steps:
         - ${CI_COMMIT_BRANCH}-${CI_COMMIT_SHA:0:8}
         - latest
     when:
-      branch: main
+      branch: master
       event: [push, manual]
