@@ -1,0 +1,21 @@
+steps:
+  build:
+    image: woodpeckerci/plugin-docker-buildx
+    settings:
+      registry: https://ghcr.io
+      repo: ghcr.io/yoyostile/shhh
+
+      username:
+        from_secret: docker_username
+      password:
+        from_secret: docker_password
+
+      dockerfile: dockerfiles/alpine.gunicorn.Dockerfile
+      context: .
+      platforms: linux/amd64
+      tags:
+        - ${CI_COMMIT_BRANCH}-${CI_COMMIT_SHA:0:8}
+        - latest
+    when:
+      branch: main
+      event: [push, manual]
